@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TaskMaster</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" >
@@ -18,7 +18,7 @@
         <div class="app-title">
             <h1>Task<span class="success">Master</span></h1>
             <div class="logo">
-                <span class="material-icons-sharp">download_done</span>
+                <span class="material-icons-sharp">done_all</span>
             </div>
         </div>
     </nav>
@@ -30,15 +30,15 @@
                     <span class="material-icons-sharp">calendar_month</span>
                     <h3>All</h3>
                 </a>
-                <a href="#" class="active">
+                <a href="#">
                     <span class="material-icons-sharp">today</span>
                     <h3>Today</h3>
                 </a>
-                <a href="#" class="active">
+                <a href="#">
                     <span class="material-icons-sharp">date_range</span>
                     <h3>Week</h3>
                 </a>
-                <a href="#" class="active">
+                <a href="#">
                     <span class="material-icons-sharp">star</span>
                     <h3>Important</h3>
                 </a>
@@ -48,18 +48,19 @@
             <div class="projects">
                 <div class="projects-heading">
                     <h2>Project (<span class="project-count">2</span>)</h2>
-                    <button>
+                    <button class="add-project">
                     <span class="material-icons-sharp">add_circle</span>
                     </button>
                 </div>
                 <div class="projects-body">
-                    <div class="project"> 
-                        <p class="project-title">Play</p>
-
+                    <div class="project active"> 
+                        <div class="project-title">
+                            <span class="material-icons-sharp">attach_money</span>
+                            <h3 class="project-name">Play</h3>
+                        </div>
                         <div class="project-config">
                             <button class="edit">
-                                <span class="material-icons-sharp">attach_money</span>
-                                <span class="material-icons-sharp">check</span>
+                                <span class="material-icons-sharp">edit</span>
                             </button>
                             <button class="delete">
                                 <span class="material-icons-sharp">delete</span>
