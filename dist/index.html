@@ -10,66 +10,229 @@
     <script src="main.js" defer></script>
 </head>
 <body>
-    <nav>
-        <button class="menu-btn">
-            <span class="material-icons-sharp menu" id="menu">menu</span>
-            <span class="material-icons-sharp close" id="close">close</span>
-        </button>
-        <div class="app-title">
-            <h1>Task<span class="success">Master</span></h1>
-            <div class="logo">
-                <span class="material-icons-sharp">done_all</span>
-            </div>
-        </div>
-    </nav>
-    <!-- navbar -->
-    <main>
-        <aside>
-            <div class="sidebar">
-                <a href="#" class="active">
-                    <span class="material-icons-sharp">calendar_month</span>
-                    <h3>All</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">today</span>
-                    <h3>Today</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">date_range</span>
-                    <h3>Week</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">star</span>
-                    <h3>Important</h3>
-                </a>
-            </div>
-            <!-- sidebar -->
-
-            <div class="projects">
-                <div class="projects-heading">
-                    <h2>Project (<span class="project-count">2</span>)</h2>
-                    <button class="add-project">
-                    <span class="material-icons-sharp">add_circle</span>
-                    </button>
+    <div class="body-container">
+        <nav>
+            <button class="menu-btn">
+                <span class="material-icons-sharp menu" id="menu">menu</span>
+                <span class="material-icons-sharp close" id="close">close</span>
+            </button>
+            <div class="app-title">
+                <h1>Task<span class="success">Master</span></h1>
+                <div class="logo">
+                    <span class="material-icons-sharp">done_all</span>
                 </div>
-                <div class="projects-body">
-                    <div class="project active"> 
-                        <div class="project-title">
-                            <span class="material-icons-sharp">attach_money</span>
-                            <h3 class="project-name">Play</h3>
-                        </div>
-                        <div class="project-config">
-                            <button class="edit">
-                                <span class="material-icons-sharp">edit</span>
-                            </button>
-                            <button class="delete">
-                                <span class="material-icons-sharp">delete</span>
-                            </button>
+            </div>
+        </nav>
+        <!-- navbar -->
+        <main>
+            <aside>
+                <div class="sidebar">
+                    <a href="#" class="active">
+                        <span class="material-icons-sharp">calendar_month</span>
+                        <h3>All</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-icons-sharp">today</span>
+                        <h3>Today</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-icons-sharp">date_range</span>
+                        <h3>Week</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-icons-sharp">star</span>
+                        <h3>Important</h3>
+                    </a>
+                </div>
+                <!-- sidebar -->
+
+                <div class="projects">
+                    <div class="projects-heading">
+                        <h2>Project (<span class="project-count">2</span>)</h2>
+                        <button class="add-project">
+                        <span class="material-icons-sharp">add_circle</span>
+                        </button>
+                    </div>
+                    <div class="projects-body">
+                        <div class="project active"> 
+                            <div class="project-title">
+                                <span class="material-icons-sharp">list</span>
+                                <h3 class="project-name">Play</h3>
+                            </div>
+                            <div class="project-config">
+                                <button class="edit">
+                                    <span class="material-icons-sharp">edit</span>
+                                </button>
+                                <button class="delete">
+                                    <span class="material-icons-sharp">delete</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </aside>
+            <!-- -----------CONTENT----------- -->
+            <section class="content">
+                <div class="content-heading">
+                    <h1><span class="active-icon material-icons-sharp">calendar_month</span></h1>
+                    <h1 class="active-headline">All</h1>
+                </div>
+            
+                <div class="content-body">
+                    <div class="left-empty"></div>
+                    <div class="content-body-container">
+                        <div class="content-body-top">
+                            <h2>Tasks (<span class="task-count">2</span>)</h2>
+                            <button class="add-task">
+                                <span class="material-icons-sharp">add_circle</span>
+                            </button>
+                        </div>
+                        <div class="content-body-bottom add-task">
+                            <div class="left">
+                                <div class="task">
+                                    <input type="checkbox" id="task-3">
+                                    <label for="task-3"><span class="custom-checkbox"></span>Grocery and then take out the trash then pick the kids</label>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <p class="date small">2023-9-05</p>
+                                <button class="edit">
+                                    <span class="material-icons-sharp">edit</span>
+                                </button>
+                                <button class="delete">
+                                    <span class="material-icons-sharp">delete</span>
+                                </button>
+                                <button class="delete priority">
+                                    <span class="material-icons-sharp">priority_high</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="content-body-bottom add-task">
+                            <div class="left">
+                                <div class="task">
+                                    <input type="checkbox" id="task-4">
+                                    <label for="task-4"><span class="custom-checkbox"></span>a third task</label>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <p class="date small">2023-9-05</p>
+                                <button class="edit">
+                                    <span class="material-icons-sharp">edit</span>
+                                </button>
+                                <button class="delete">
+                                    <span class="material-icons-sharp">delete</span>
+                                </button>
+                                <button class="delete">
+                                    <span class="material-icons-sharp">priority_high</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="left-empty"></div>
+                    </div>                
+                </div>
+                
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-project hide">
+        <div class="container-project">
+            <h2>New Project</h2>
+            <div class="close">+</div>
+            <form data-new-project-form>
+                <label for="name-project">Project name:</label><br />
+                <input type="text" id="name-project" data-new-task-input placeholder="Project name" ariel-label="Add new project item" autocomplete="off" required
+                /><br />              
+                <input type="submit" />
+            </form>
+        </div>  
+    </div>
+
+        <!-- -----------MODAL-TASK----------- -->
+    <div class="modal-task hide" id="modal">
+        <div class="container-task">
+            <h2 class="modal-header">New Task</h2>
+            <div class="close">+</div>
+            <form data-new-task-form>
+                <label for="name">Task name:</label><br />
+                <input type="text" id="name" data-new-task-input placeholder="Task name" ariel-label="Add new task item" autocomplete="off" required
+                /><br />
+                <label for="due-date">Due date:</label>
+                <input type="date" id="due-date" name="due-date" /><br />
+                <label for="priority">Priority:</label><br />
+                <select name="priority" id="priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option></select
+                ><br />
+                <label for="description">Description:</label><br />
+                <textarea
+                name="description"
+                id="description"
+                cols="30"
+                rows="6"
+                ></textarea
+                ><br />
+                <input type="submit" />
+          </form>
+        </div>
+    </div>      
+    <!-- TASK INFO CONTENT -->
+    <div class="info-div hide">
+        <div class="info-div-container">
+            <h2 class="modal-header">New Task</h2>
+            <div class="close">+</div>
+
+            <!-- TITLE -->
+            <div class="task-title-div">
+            <p class="info-title">Title:</p>
+            <p class="info-task-title"></p>
             </div>
-        </aside>
-    </main>
+
+            <!-- DESCRIPTION -->
+            <div class="task-description-div">
+            <p class="info-description">Description:</p>
+            <p class="info-task-description"></p>
+            </div>
+
+            <!-- DUE DATE -->
+            <div class="task-due-date-div">
+            <p class="info-due-date">Due date:</p>
+            <p class="info-task-due-date"></p>
+            </div>
+
+            <!-- PRIORITY -->
+            <div class="task-priority-div">
+            <p class="info-priority">Priority:</p>
+            <p class="info-task-priority"></p>
+            </div>
+
+            <!-- PROJECT -->
+            <div class="task-project-div">
+            <p class="info-project">Project:</p>
+            <p class="info-task-project"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="deletion-div hide">
+        <div class="deletion-div-container">
+            <h2 class="modal-header danger">Delete Task</h2>
+            <div class="close">+</div>
+            <!-- PROJECT DELETION -->
+            <p class="project-deletion-text hide">Are you sure?<br><br>
+            Project <span class="project-deletion-title"></span> will be gone forever!</p>
+    
+            <!-- TASK DELETION -->
+            <p class="task-deletion-text hide">Are you sure?<br><br>
+              Task <span class="task-deletion-title"></span> will be gone forever!</p>
+            <div class="modal-buttons">
+                <button type="button" class="cancel-modal">Cancel</button>
+                <button type="button" class="modal-task-button confirm-modal">Delete</button>
+            </div>
+        </div>
+    </div>
+    
+    
 </body>
 </html>
