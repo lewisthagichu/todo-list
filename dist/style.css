@@ -2,7 +2,7 @@
 
 :root {
     --color-white: #ffffff;
-    --color-light: #f0eff5;
+    --color-light: #fff;
     --color-gray-light: #7a7f86;
     --color-gray-dark: #56555e;
     --color-dark: #27282f;
@@ -72,6 +72,7 @@ h5 {
 
 p {
     color: var(--color-gray-dark);
+    font-size: 1.4rem;
 }
 
 b {
@@ -104,30 +105,6 @@ small {
 
 .purple {
     color: var(--color-purple);
-}
-
-.bg-primary {
-    background: var(--color-primary);
-}
-
-.bg-danger {
-    background: var(--color-danger);
-}
-
-.bg-success {
-    background: var(--color-success);
-}
-
-.bg-purple {
-    background: var(--color-purple);
-}
-
-.bg-dark {
-    background: #27282f;
-}
-
-.bg-green {
-    background: #15616D;
 }
 
 html {
@@ -166,7 +143,7 @@ nav {
 }
 
 .menu-btn .menu,
-.menu-btn .close {
+.menu-btn .menu-close {
     display: inline-block;
     position: absolute;
     font-size: 3rem;
@@ -177,11 +154,11 @@ nav {
 }
 
 .menu-btn .menu:hover,
-.menu-btn .close:hover {
+.menu-btn .menu-close:hover {
     background: rgb(238, 236, 236);
 }
 
-.menu-btn .close {
+.menu-btn .menu-close {
     display: none;
 }
 
@@ -302,7 +279,7 @@ aside {
 
 .projects button,
 .right button,
-.content-body-top button {
+.tasks-title-div button {
     background: inherit;
     color: var(--color-gray-light);
     transition: all 200ms ease;
@@ -311,7 +288,7 @@ aside {
 
 .projects button:hover,
 .right button:not(.priority):hover,
-.content-body-top button:hover {
+.tasks-title-div button:hover {
     color: var(--color-primary);
     border-radius: 3px;
     transform: scale(1.2);
@@ -360,21 +337,20 @@ aside {
     font-size: 4rem;
 }
 
-.content-body {
-    display: grid;
-    grid-template-columns: 1fr minmax(200px, 1000px) 1fr;    
+.tasks-div {
+    max-width: 1000px;
+    margin: 0 auto;  
+    padding: 0 4rem;   
 }
 
-
-.content-body-top {
+.tasks-title-div {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid var(--color-light);
-    padding-bottom: 1rem;
-      
+    padding-bottom: 1rem;      
 }
 
-.content-body-bottom {
+.tasks-list {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -382,13 +358,17 @@ aside {
 }
 
 .left {
-    padding-top: 1rem;
+    padding-top: 1.4rem;
 }
 
 .right {
     display: flex;
     align-items: center;
     gap: .5rem;
+}
+
+.right p {
+    font-size: 1.2rem;
 }
 
 .right button.priority {
@@ -413,10 +393,10 @@ aside {
     align-items: center;
     position: relative; 
     white-space: nowrap;
-    max-width: 600px;
+    max-width: 300px;
     overflow: hidden;
     text-overflow: ellipsis; 
-    font-size: 1.2rem;  
+    font-size: 1.4rem;  
     line-height: 2rem;
 }
 
@@ -471,140 +451,112 @@ aside {
     transform-origin: left;
 }
 
-/* -----------------------MODAL TASK & PROJECT------------------------------ */
-.modal-project,
-.modal-task {
-    height: 100vh;
+#modal {
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;    
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: .2s;
+    margin: 0 auto;
+    z-index: 2;
 }
 
-.container-project,
-.container-task {
+.modal-card {
     position: relative;
-    padding: var(--card-padding);
-    background: #fff;
-    border-radius: var(--card-border-radius);
+    margin: 15% auto;
+    max-width: 400px;
+    border-radius: 5px;
+    box-shadow: rgba(46, 46, 46, 0.2) 0px 2px 8px 0px;
+    animation: fadeIn .2s;
+    transition: box-shadow 300ms ease;
 }
 
-
-.container-task h2,
-.container-project h2,
-.info-div h2,
-.deletion-div h2 {
-    text-align: center;
-    padding: 1.5rem;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    margin: -1.5rem -1.5rem 0 -1.5rem;
-    font-size: 3.5rem;
-    color: var(--color-primary);
-}
-  
-.container-task .close,
-.container-project .close,
-.info-div .close,
-.deletion-div .close {
-    position: absolute;
-    top: 0.2rem;
-    right: 1rem;
-    font-size: 3.5rem;
-    cursor: pointer;
-    transform: rotate(45deg);
-    transition: 0.3s ease;
-    color: var(--color-primary);
-  }
-  
-.container-task .close:hover,
-.container-project .close:hover {
-    color: black;
-  }
-  
-.container-task label,
-.container-project label {
-    font-size: 1.6rem;
-    color: black;
-  }
-
-.container-task input[type="text"],
-.container-project input[type="text"],
-select {
-  font-family: "Poppins", sans-serif;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border: 0;
-  background: #eeeeee;
-  font-size: 1.4rem;
-  outline: 0;
-  width: 100%;
+.modal-card:hover {
+    box-shadow: none;
 }
 
-.container-task input[type="date"],
-.container-project input[type="date"] {
-    font-family: "Poppins", sans-serif;
-    display: block;
-    margin-bottom: 1rem;
-    border: none;
-    background: #eeeeee;
-    padding: 1rem;
-    width: 100%;
-}
-  
-.container-task textarea,
-.container-project textarea {
-    font-family: "Poppins", sans-serif;
-    font-size: 1.4rem;
-    background: #eeeeee;
-    padding: 1rem;
-    outline: none;
-    border: none;
-    resize: none;
-    width: 100%;
-}
-  
-.container-task input[type="submit"],
-.container-project input[type="submit"] {
-    padding: 1rem;
-    margin-top: 1rem;
-    border: 0;
-    outline: 0;
-    width: 100%;
-    cursor: pointer;
-    font-size: 1.6rem;
-    border: 1px solid var(--color-gray-dark);
-    color: var(--darkslategray);
-    letter-spacing: 0.1rem;
-    background: var(--white);
-    transition: 0.5s ease;
-}
-  
-.container-task input[type="submit"]:hover,
-.container-project input[type="submit"]:hover {
-    background: var(--color-primary-dark);
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: var(--color-light);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    padding: 20px;
+}
+
+.fa-times {
+    height: 20px;
+}
+
+.modal-close {
+    margin: 10px 20px;
+    color: var(--color-white);
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+.modal-close:hover {
+    color: var(--color-dark);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+    background-color: var(--color-light);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-gray-light);
+}
+
+.cancel-modal {
+    background-color: var(--color-light);
+    color: var(--color-gray-dark);
+    border: 1px solid var(--color-gray-light);
+    border-radius: 3px;
+    transition: .3s;
+    padding: var(--padding-2);
+}
+
+.cancel-modal:hover {
+    color: var(--color-light);
+    background-color: var(--color-gray-dark);
+    
+}
+
+.confirm-modal {
+    margin-left: 10px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: .3s;
+    padding: var(--padding-2);
+
+}
+
+.confirm-modal:hover {
+    background-color: var(--color-primary-dark);
 }
 
 /* TASK INFO */
-.info-div,
-.deletion-div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.info-div-container,
-.deletion-div-container {
-    position: relative;
-    padding: var(--card-padding);
-    background: #fff;
-    border-radius: var(--card-border-radius);
-}
-
 .task-title-div,
 .task-description-div,
 .task-due-date-div,
@@ -612,13 +564,14 @@ select {
 .task-project-div {
   display: flex;
   padding: 20px 0;
-  border-bottom: 1px solid var(--color-gray-light);
-  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(158, 158, 158, 0.2);
 }
 .task-title-div {
   padding-top: 0;
 }
-
+.task-project-div {
+  border-bottom: none;
+}
 .info-title,
 .info-description,
 .info-due-date,
@@ -629,9 +582,7 @@ select {
 }
 .info-task-title,
 .info-task-description,
-.info-task-priority,
-.info-task-due-date,
-.info-task-project {
+.info-task-priority {
   width: 250px;
 }
 .info-task-description {
@@ -644,65 +595,76 @@ select {
   max-width: 650px;
 }
 .due-date {
+  align-self: center;
   font-size: 13px;
   color: var(--dark-aqua);
 }
 .default-tasks-icons i {
   font-size: 17px;
 }
-
-
-/* -----DELETION--- */
-
-.deletion-div-container {
-    width: 400px;
-}
-
-.deletion-div-container h2,
-.deletion-div-container .close {
-    color: var(--color-danger);
-}
-
-.deletion-div-container p {
-    font-size: 1.4rem;
-}
-
-.modal-buttons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--color-gray-dark);
-}
-
-.modal-buttons button {
-    padding: var(--padding-2);
-    cursor: pointer;
-}
-
-.cancel-modal {
+  
+  /* MODAL FORM INPUT STYLES */
+#form input,
+.task-description,
+.task-priority {
+    width: 100%;
+    margin: 5px 0 20px 0;
+    padding: 10px;
     background-color: var(--color-light);
-    color: var(--color-gray-dark);
+    color: var(--color-gray-light);
     border: 1px solid var(--color-gray-light);
     border-radius: 3px;
     transition: .3s;
+}
+
+#form input:focus,
+.task-description:focus,
+.task-priority:focus {
+    border-color: var(--aqua);
+    transition: .3s;
+}
+
+#form label {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.4rem;
+}
+
+.title-star {
+    color: red;
+}
+
+.modal-title-error {
+    margin: -15px 0 20px 0;
+    font-size: 13px;
+    color: red;
+}
+  
+  /* MODAL TO DELETE A PROJECT */
+.deletion-modal-header {
+    background: var(--color-danger)
+}
+
+.project-deletion-title,
+.task-deletion-title {
+    font-weight: 700;
+}
+
+.cancel-deletion:hover {
+    color: var(--color-white);
+    border: 1px solid var(--color-gray-light);
+}
+
+.confirm-deletion {
+    background-color: var(--color-danger);
     opacity: .7;
 }
 
-.confirm-modal {
-    margin-left: 10px;
+.confirm-deletion:hover {
     background-color: var(--color-danger);
-    color: var(--color-light);
-    border: 1px solid transparent;
-    border-radius: 3px;
-    transition: .3s;
-    opacity: .8;
-}
-.confirm-modal:hover,
-.cancel-modal:hover {
     opacity: 1;
 }
+  
+
 
 .hide {
     display: none;
