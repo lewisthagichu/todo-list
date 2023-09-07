@@ -6,19 +6,17 @@
     <title>TaskMaster</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-    <link rel="stylesheet" href="css/fontawesome.min.css">
     <script src="main.js" defer></script>
 </head>
 <body>
-    <div class="body-container hide">
+    <div class="body-container">
         <nav>
             <button class="menu-btn">
                 <span class="material-icons-sharp menu" id="menu">menu</span>
-                <span class="material-icons-sharp menu-close" id="menu-close">close</span>
+                <span class="material-icons-sharp menu-close" id="menu-close-btn">close</span>
             </button>
             <div class="app-title">
-                <h1>Task<span class="success">Master</span></h1>
+                <h1>Task<span class="primary">Master</span></h1>
                 <div class="logo">
                     <span class="material-icons-sharp">done_all</span>
                 </div>
@@ -50,12 +48,12 @@
                 <div class="projects">
                     <div class="projects-heading">
                         <h2>Project (<span class="project-count">2</span>)</h2>
-                        <button class="add-project">
+                        <button class="add-project" id="add-project">
                         <span class="material-icons-sharp">add_circle</span>
                         </button>
                     </div>
                     <div class="projects-body">
-                        <div class="project active"> 
+                        <div class="project"> 
                             <div class="project-title">
                                 <span class="material-icons-sharp">list</span>
                                 <h3 class="project-name">Play</h3>
@@ -105,7 +103,47 @@
                                 <span class="material-icons-sharp">priority_high</span>
                             </button>
                         </div>
-                    </div>              
+                    </div>
+                    <div class="tasks-list">
+                        <div class="left">
+                            <div class="task">
+                                <input type="checkbox" id="task-4">
+                                <label for="task-4"><span class="custom-checkbox"></span>Watch football after coding</label>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <p class="date small primary">2023-9-05</p>
+                            <button class="edit">
+                                <span class="material-icons-sharp">edit</span>
+                            </button>
+                            <button class="delete">
+                                <span class="material-icons-sharp">delete</span>
+                            </button>
+                            <button class="delete priority">
+                                <span class="material-icons-sharp">priority_high</span>
+                            </button>
+                        </div>
+                    </div>   
+                    <div class="tasks-list">
+                        <div class="left">
+                            <div class="task">
+                                <input type="checkbox" id="task-4">
+                                <label for="task-4"><span class="custom-checkbox"></span>Watch football after coding</label>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <p class="date small primary">2023-9-05</p>
+                            <button class="edit">
+                                <span class="material-icons-sharp">edit</span>
+                            </button>
+                            <button class="delete">
+                                <span class="material-icons-sharp">delete</span>
+                            </button>
+                            <button class="delete priority">
+                                <span class="material-icons-sharp">priority_high</span>
+                            </button>
+                        </div>
+                    </div>            
                 </div>
                 
             </section>
@@ -113,7 +151,7 @@
     </div>
 
     <!-- MODAL -->
-    <div id="modal" class="close">
+    <div id="modal" class="close hide">
         <div class="modal-card">
             <div class="modal-header">
                 <h2 class="modal-main-title">Edit Project</h2>

@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("\n\n//# sourceURL=webpack://todo-app/./src/index.js?");
+eval("const menuShowBtn = document.getElementById('menu');\nconst menuCloseBtn = document.getElementById('menu-close-btn');\nconst addProjectBtn = document.getElementById('add-project');\nconst sidebar = document.querySelector('aside');\nconst modal = document.getElementById('modal');\n\nmenuShowBtn.addEventListener('click', showMenu);\n\nmenuCloseBtn.addEventListener('click', hideMenu);\n\naddProjectBtn.addEventListener('click', () => {\n  modal.style.display = 'block';\n});\n\nfunction showMenu() {\n  sidebar.style.left = '0';\n  menuShowBtn.style.display = 'none';\n  menuCloseBtn.style.display = 'inline-block';\n}\n\nfunction hideMenu() {\n  sidebar.style.left = '-100%';\n  menuCloseBtn.style.display = 'none';\n  menuShowBtn.style.display = 'inline-block';\n}\n\n\n//# sourceURL=webpack://todo-app/./src/index.js?");
 
 /***/ })
 

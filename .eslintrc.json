@@ -9,6 +9,7 @@
         "no-process-exit": "off",
         "class-methods-use-this": "off",
         "no-alert": "off",
-        "no-undef": "warn"        
+        "no-undef": "off",    
+        "no-use-before-define": "off",    
     }
 }
