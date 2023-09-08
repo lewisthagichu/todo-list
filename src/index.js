@@ -3,13 +3,21 @@ const menuCloseBtn = document.getElementById('menu-close-btn');
 const addProjectBtn = document.getElementById('add-project');
 const sidebar = document.querySelector('aside');
 const modal = document.getElementById('modal');
+const closeModalBtn = document.querySelector('.close');
 
 menuShowBtn.addEventListener('click', showMenu);
 
 menuCloseBtn.addEventListener('click', hideMenu);
 
 addProjectBtn.addEventListener('click', () => {
-  modal.style.display = 'block';
+  modal.classList.remove('hide');
+  modal.classList.add('show');
+  overlay.style.opacity = 1;
+});
+
+closeModalBtn.addEventListener('click', () => {
+  modal.classList.remove('show');
+  overlay.style.opacity = 0;
 });
 
 function showMenu() {
