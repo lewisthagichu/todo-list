@@ -1,33 +1,20 @@
-const menuShowBtn = document.getElementById('menu');
-const menuCloseBtn = document.getElementById('menu-close-btn');
-const addProjectBtn = document.getElementById('add-project');
-const sidebar = document.querySelector('aside');
-const modal = document.getElementById('modal');
-const closeModalBtn = document.querySelector('.close');
+import dom from './dom';
+import handlers from './handlers';
 
-menuShowBtn.addEventListener('click', showMenu);
+handlers.listenClicks();
 
-menuCloseBtn.addEventListener('click', hideMenu);
+// const addProjectBtn = document.getElementById('add-project');
+// const sidebar = document.querySelector('aside');
+// const modal = document.getElementById('modal');
+// const closeModalBtn = document.querySelector('.close');
 
-addProjectBtn.addEventListener('click', () => {
-  modal.classList.remove('hide');
-  modal.classList.add('show');
-  overlay.style.opacity = 1;
-});
+// addProjectBtn.addEventListener('click', () => {
+//   modal.classList.remove('hide');
+//   modal.classList.add('show');
+//   overlay.style.opacity = 1;
+// });
 
-closeModalBtn.addEventListener('click', () => {
-  modal.classList.remove('show');
-  overlay.style.opacity = 0;
-});
-
-function showMenu() {
-  sidebar.style.left = '0';
-  menuShowBtn.style.display = 'none';
-  menuCloseBtn.style.display = 'inline-block';
-}
-
-function hideMenu() {
-  sidebar.style.left = '-100%';
-  menuCloseBtn.style.display = 'none';
-  menuShowBtn.style.display = 'inline-block';
-}
+// closeModalBtn.addEventListener('click', () => {
+//   modal.classList.remove('show');
+//   overlay.style.opacity = 0;
+// });

@@ -52,8 +52,22 @@
                         <span class="material-icons-sharp">add_circle</span>
                         </button>
                     </div>
-                    <div class="projects-body">
-                        <div class="project"> 
+                    <div class="projects-body" data-project-container>
+                        <div class="project" > 
+                            <div class="project-title">
+                                <span class="material-icons-sharp">list</span>
+                                <h3 class="project-name">Play</h3>
+                            </div>
+                            <div class="project-config">
+                                <button class="edit">
+                                    <span class="material-icons-sharp">edit</span>
+                                </button>
+                                <button class="delete">
+                                    <span class="material-icons-sharp">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project" data-project-container> 
                             <div class="project-title">
                                 <span class="material-icons-sharp">list</span>
                                 <h3 class="project-name">Play</h3>
@@ -103,46 +117,6 @@
                                 <span class="material-icons-sharp">priority_high</span>
                             </button>
                         </div>
-                    </div>
-                    <div class="tasks-list">
-                        <div class="left">
-                            <div class="task">
-                                <input type="checkbox" id="task-4">
-                                <label for="task-4"><span class="custom-checkbox"></span>Watch football after coding</label>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <p class="date small primary">2023-9-05</p>
-                            <button class="edit">
-                                <span class="material-icons-sharp">edit</span>
-                            </button>
-                            <button class="delete">
-                                <span class="material-icons-sharp">delete</span>
-                            </button>
-                            <button class="delete priority">
-                                <span class="material-icons-sharp">priority_high</span>
-                            </button>
-                        </div>
-                    </div>   
-                    <div class="tasks-list">
-                        <div class="left">
-                            <div class="task">
-                                <input type="checkbox" id="task-4">
-                                <label for="task-4"><span class="custom-checkbox"></span>Watch football after coding</label>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <p class="date small primary">2023-9-05</p>
-                            <button class="edit">
-                                <span class="material-icons-sharp">edit</span>
-                            </button>
-                            <button class="delete">
-                                <span class="material-icons-sharp">delete</span>
-                            </button>
-                            <button class="delete priority">
-                                <span class="material-icons-sharp">priority_high</span>
-                            </button>
-                        </div>
                     </div>            
                 </div>
                 
@@ -151,7 +125,7 @@
     </div>
 
     <!-- MODAL -->
-    <div id="modal" class="close hide">
+    <div id="modal" class="modal close hide">
         <div class="modal-card">
             <div class="modal-header">
                 <h2 class="modal-main-title">Edit Project</h2>
@@ -168,7 +142,7 @@
                     Task <span class="task-deletion-title"></span> will be gone forever!</p>
 
                 <!-- TASK INFO CONTENT -->
-                <div class="info-div">
+                <div class="info-div hide">
 
                     <!-- TITLE -->
                     <div class="task-title-div">
