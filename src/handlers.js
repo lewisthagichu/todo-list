@@ -1,16 +1,27 @@
-import dom from './dom';
+import doms from './dom';
 
 const handlers = (() => {
+  const dom = doms();
+
   function listenClicks() {
     document.addEventListener('click', (event) => {
       const { target } = event;
-      const ui = dom();
 
       // TOGGLE SIDE MENU
       if (target.classList.contains('menu')) {
-        ui.toggleMenu.showMenu();
+        dom.toggleMenu().showMenu();
       } else if (target.classList.contains('menu-close')) {
-        ui.toggleMenu.hideMenu();
+        dom.toggleMenu().hideMenu();
+      }
+
+      // MODAL FOR ADDING PROJECT
+      if (target.classList.contains('add-project')) {
+        dom.manipulateModal('show', 'Add Project', 'Add');
+      }
+
+      // CLOSE MODAL
+      if (target.classList.contains('close')) {
+        dom.manipulateModal('close');
       }
     });
   }

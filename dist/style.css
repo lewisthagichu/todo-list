@@ -562,7 +562,7 @@ aside {
     border: 1px solid transparent;
     border-radius: 3px;
     transition: .3s;
-    padding: var(--padding-2);
+    padding: 8px 16px;
 
 }
 

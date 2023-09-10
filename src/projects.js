@@ -1,11 +1,11 @@
 const projects = (() => {
   let projectsList = [];
 
-  function createProject(title) {
+  function createProject(name) {
     const project = {};
 
     project.id = Date.now().toString();
-    project.title = title;
+    project.name = name;
     project.tasks = [];
 
     projectsList.push(project);
