@@ -13,10 +13,7 @@ const doms = () => {
   const taskDueDate = modal.querySelector('#dueDate');
   const taskPrioritySelection = modal.querySelector('.task-priority');
 
-  const LOCAL_STORAGE_PROJECT_KEY = 'task.projects';
   const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = 'task.selectedProjectId';
-  let projectsList =
-    JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
   let selectedProjectId = localStorage.getItem(
     LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY,
   );
@@ -45,7 +42,8 @@ const doms = () => {
   }
 
   function renderProjects() {
-    projectsList.forEach((project) => {
+    clearElement(projectContainer);
+    projects.projectsList.forEach((project) => {
       const projectElement = createHTMLElement('div', 'project');
       projectElement.dataset.projectId = project.id;
       if (project.id === selectedProjectId) {
@@ -142,11 +140,20 @@ function createHTMLElement(tagName, className, textContent) {
 }
 
 function save() {
-  localStorage.setItem(LOCAL_STORAGE_PROJECT_KEY, JSON.stringify(projectsList));
+  localStorage.setItem(
+    LOCAL_STORAGE_PROJECT_KEY,
+    JSON.stringify(projects.projectsList),
+  );
   localStorage.setItem(
     LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY,
     selectedProjectId,
   );
+}
+
+function clearElement(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
 }
 
 export default doms;

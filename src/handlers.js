@@ -24,6 +24,10 @@ const handlers = (() => {
         dom.manipulateModal('close');
       }
     });
+
+    // VALIDATE MODAL
+    if (target.classList.contains('confirm-modal')) {
+    }
   }
 
   return { listenClicks };
