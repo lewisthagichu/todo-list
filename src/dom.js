@@ -2,6 +2,7 @@ import projects from './projects';
 
 const doms = () => {
   const projectContainer = document.querySelector('[data-project-container]');
+  const selectLinks = document.querySelectorAll('[data-page');
 
   const modal = document.querySelector('#modal');
   const form = modal.querySelector('#form');
@@ -13,10 +14,9 @@ const doms = () => {
   const taskDueDate = modal.querySelector('#dueDate');
   const taskPrioritySelection = modal.querySelector('.task-priority');
 
-  const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = 'task.selectedProjectId';
-  let selectedProjectId = localStorage.getItem(
-    LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY,
-  );
+  const SELECTED_PROJECT_ID_KEY = 'task.selectedProjectId';
+
+  let selectedProjectId = localStorage.getItem(SELECTED_PROJECT_ID_KEY);
 
   function toggleMenu() {
     const menuShowBtn = document.getElementById('menu');
@@ -45,6 +45,7 @@ const doms = () => {
     clearElement(projectContainer);
     projects.projectsList.forEach((project) => {
       const projectElement = createHTMLElement('div', 'project');
+      projectElement.setAttribute('data-project', '');
       projectElement.dataset.projectId = project.id;
       if (project.id === selectedProjectId) {
         projectElement.classList.add('active');
@@ -65,8 +66,22 @@ const doms = () => {
       projectTitle.appendChild(projectTitleHeader);
 
       const projectConfig = createHTMLElement('div', 'project-config');
-      const editButton = createHTMLElement('button', 'edit', 'edit');
-      const deleteButton = createHTMLElement('button', 'delete', 'delete');
+      const editButton = createHTMLElement('button', 'edit');
+      const editButtonSpan = createHTMLElement(
+        'span',
+        'material-icons-sharp',
+        'edit',
+      );
+      editButton.appendChild(editButtonSpan);
+
+      const deleteButton = createHTMLElement('button', 'delete');
+      const deleteButtonSpan = createHTMLElement(
+        'span',
+        ['delete-project', 'material-icons-sharp'],
+        'delete',
+      );
+      deleteButton.appendChild(deleteButtonSpan);
+
       projectConfig.appendChild(editButton);
       projectConfig.appendChild(deleteButton);
 
@@ -110,7 +125,12 @@ const doms = () => {
       if (modalTask === 'Add Project') {
         // SHOW PROJECT TITLE
         modalMainTitle.textContent = 'Add Project';
-        console.log('test');
+      }
+
+      // IF MODAL IS FOR ADDING TASK
+      if (modalTask === 'Add Project') {
+        // SHOW PROJECT TITLE
+        modalMainTitle.textContent = 'Add Project';
       }
     }
 
@@ -121,33 +141,90 @@ const doms = () => {
     }
   }
 
+  function validateModal(modalTask, modalAction) {
+    const modalTitleText = modalTitle.value;
+    const projectDeletionText = document.querySelector(
+      '.project-deletion-text',
+    );
+    let taskPriority;
+
+    // CHECK FOR MODAL TITLE ERROR IF MODAL FORM IS SHOWN THEN ADD NEW PROJECT
+    if (!form.classList.contains('hide') && modalTitleText === '') {
+      modalTitleError.classList.remove('hide');
+      modalTitleError.classList.add('show');
+    } else if (modalAction === 'add' && modalTask === 'Add Project') {
+      const projectName = modalTitle.value;
+      projects.createProject(projectName);
+      modalTitle.value = null;
+      manipulateModal('close');
+      save();
+      renderProjects();
+    }
+  }
+
+  function selectActivePage(target) {
+    if (target.classList.contains('page')) {
+      const activePageDiv = target;
+      activePageDiv.classList.add('active');
+    } else {
+      selectedProjectId = target.dataset.projectId;
+      const activePageDiv = target;
+      activePageDiv.classList.add('active');
+      save();
+      renderProjects();
+      console.log('test');
+    }
+  }
+
+  function selectLink() {
+    selectLinks.forEach((link) => {
+      link.classList.remove('active');
+      link.dataset.id = Date.now().toString();
+    });
+  }
+
+  function deleteProject() {
+    projects.projectsList = projects.projectsList.filter(
+      (project) => project.id !== selectedProjectId,
+    );
+    selectedProjectId = null;
+    save();
+    renderProjects();
+  }
+
+  function save() {
+    localStorage.setItem('PROJECT_KEY', JSON.stringify(projects.projectsList));
+    localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
+  }
+
   return {
     toggleMenu,
     renderProjects,
     manipulateModal,
+    validateModal,
+    selectActivePage,
+    deleteProject,
   };
 };
 
-function createHTMLElement(tagName, className, textContent) {
+function createHTMLElement(tagName, classNames, textContent) {
   const element = document.createElement(tagName);
-  if (className) {
-    element.className = className;
+
+  if (classNames) {
+    if (Array.isArray(classNames)) {
+      // If classNames is an array, join them into a single string
+      element.className = classNames.join(' ');
+    } else {
+      // If classNames is a single string, assign it directly
+      element.className = classNames;
+    }
   }
+
   if (textContent) {
     element.textContent = textContent;
   }
-  return element;
-}
 
-function save() {
-  localStorage.setItem(
-    LOCAL_STORAGE_PROJECT_KEY,
-    JSON.stringify(projects.projectsList),
-  );
-  localStorage.setItem(
-    LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY,
-    selectedProjectId,
-  );
+  return element;
 }
 
 function clearElement(element) {

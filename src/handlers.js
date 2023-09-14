@@ -5,6 +5,8 @@ const handlers = (() => {
 
   function listenClicks() {
     document.addEventListener('click', (event) => {
+      const modalMainTitle = document.querySelector('.modal-main-title');
+
       const { target } = event;
 
       // TOGGLE SIDE MENU
@@ -23,11 +25,33 @@ const handlers = (() => {
       if (target.classList.contains('close')) {
         dom.manipulateModal('close');
       }
-    });
 
-    // VALIDATE MODAL
-    if (target.classList.contains('confirm-modal')) {
-    }
+      // VALIDATE MODAL
+      if (target.classList.contains('confirm-modal')) {
+        // VALIDATE MODAL FOR ADDING PROJECT
+        if (target.textContent === 'Add') {
+          if (modalMainTitle.textContent === 'Add Project') {
+            dom.validateModal('Add Project', 'add');
+          }
+        }
+      }
+
+      // SELECT ACTIVE PAGE
+      if (target.closest('.page')) {
+        const activeLink = target.closest('.page');
+        dom.selectActivePage(activeLink);
+      }
+
+      if (target.closest('.project')) {
+        const projectDiv = target.closest('.project');
+        dom.selectActivePage(projectDiv);
+      }
+
+      // DELETE PROJECT
+      if (target.classList.contains('delete-project')) {
+        dom.deleteProject();
+      }
+    });
   }
 
   return { listenClicks };

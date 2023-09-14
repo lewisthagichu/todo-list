@@ -2,7 +2,7 @@ const projects = (() => {
   let projectsList = [];
 
   // GET DEFAULT PROJECTS AND TASKS FROM LOCAL STORAGE
-  if (localStorage.getItem('projects') === null) {
+  if (localStorage.getItem('PROJECT_KEY') === null) {
     projectsList = [
       {
         id: 1,
@@ -39,9 +39,7 @@ const projects = (() => {
       },
     ];
   } else {
-    const projectsFromStorage = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY),
-    );
+    const projectsFromStorage = JSON.parse(localStorage.getItem('PROJECT_KEY'));
     projectsList = projectsFromStorage;
   }
 
