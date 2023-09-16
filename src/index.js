@@ -1,6 +1,5 @@
-import doms from './dom';
+import dom from './dom';
 import handlers from './handlers';
 
-const dom = doms();
 handlers.listenClicks();
 dom.renderProjects();

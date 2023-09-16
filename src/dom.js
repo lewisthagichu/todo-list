@@ -1,8 +1,9 @@
+import { format, parseISO, differenceInDays } from 'date-fns';
 import projects from './projects';
 
-const doms = () => {
+const dom = (() => {
   const projectContainer = document.querySelector('[data-project-container]');
-  const selectLinks = document.querySelectorAll('[data-page');
+  const selectLinks = document.querySelectorAll('[data-page]');
 
   const modal = document.querySelector('#modal');
   const form = modal.querySelector('#form');
@@ -154,11 +155,12 @@ const doms = () => {
       modalTitleError.classList.add('show');
     } else if (modalAction === 'add' && modalTask === 'Add Project') {
       const projectName = modalTitle.value;
+      console.log(projectName);
       projects.createProject(projectName);
       modalTitle.value = null;
-      manipulateModal('close');
       save();
       renderProjects();
+      manipulateModal('close');
     }
   }
 
@@ -172,7 +174,6 @@ const doms = () => {
       activePageDiv.classList.add('active');
       save();
       renderProjects();
-      console.log('test');
     }
   }
 
@@ -183,18 +184,18 @@ const doms = () => {
     });
   }
 
+  function save() {
+    localStorage.setItem('PROJECT_KEY', JSON.stringify(projects.projectsList));
+    console.log('hieh');
+    localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
+  }
+
   function deleteProject() {
     projects.projectsList = projects.projectsList.filter(
       (project) => project.id !== selectedProjectId,
     );
     selectedProjectId = null;
-    save();
     renderProjects();
-  }
-
-  function save() {
-    localStorage.setItem('PROJECT_KEY', JSON.stringify(projects.projectsList));
-    localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
   }
 
   return {
@@ -204,8 +205,9 @@ const doms = () => {
     validateModal,
     selectActivePage,
     deleteProject,
+    save,
   };
-};
+})();
 
 function createHTMLElement(tagName, classNames, textContent) {
   const element = document.createElement(tagName);
@@ -233,4 +235,4 @@ function clearElement(element) {
   }
 }
 
-export default doms;
+export default dom;

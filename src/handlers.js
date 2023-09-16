@@ -1,8 +1,6 @@
-import doms from './dom';
+import dom from './dom';
 
 const handlers = (() => {
-  const dom = doms();
-
   function listenClicks() {
     document.addEventListener('click', (event) => {
       const modalMainTitle = document.querySelector('.modal-main-title');
