@@ -19,7 +19,6 @@ const projects = (() => {
     project.tasks = [];
 
     projectsList.push(project);
-    console.log(projectsList);
   }
 
   return {

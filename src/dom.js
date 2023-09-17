@@ -5,6 +5,9 @@ const dom = (() => {
   const projectContainer = document.querySelector('[data-project-container]');
   const selectLinks = document.querySelectorAll('[data-page]');
 
+  const SELECTED_PROJECT_ID_KEY = 'task.selectedProjectId';
+  let selectedProjectId = localStorage.getItem(SELECTED_PROJECT_ID_KEY);
+
   const modal = document.querySelector('#modal');
   const form = modal.querySelector('#form');
   const modalTitle = modal.querySelector('#modal-title');
@@ -14,10 +17,6 @@ const dom = (() => {
   const taskDescription = modal.querySelector('.task-description');
   const taskDueDate = modal.querySelector('#dueDate');
   const taskPrioritySelection = modal.querySelector('.task-priority');
-
-  const SELECTED_PROJECT_ID_KEY = 'task.selectedProjectId';
-
-  let selectedProjectId = localStorage.getItem(SELECTED_PROJECT_ID_KEY);
 
   function toggleMenu() {
     const menuShowBtn = document.getElementById('menu');
@@ -44,6 +43,7 @@ const dom = (() => {
 
   function renderProjects() {
     clearElement(projectContainer);
+    console.log(projects.projectsList);
     projects.projectsList.forEach((project) => {
       const projectElement = createHTMLElement('div', 'project');
       projectElement.setAttribute('data-project', '');
@@ -89,6 +89,7 @@ const dom = (() => {
       projectElement.appendChild(projectTitle);
       projectElement.appendChild(projectConfig);
       projectContainer.appendChild(projectElement);
+      console.log('done');
     });
   }
 
@@ -155,10 +156,10 @@ const dom = (() => {
       modalTitleError.classList.add('show');
     } else if (modalAction === 'add' && modalTask === 'Add Project') {
       const projectName = modalTitle.value;
-      console.log(projectName);
       projects.createProject(projectName);
       modalTitle.value = null;
       save();
+      console.log(projects.projectsList);
       renderProjects();
       manipulateModal('close');
     }
@@ -173,6 +174,7 @@ const dom = (() => {
       const activePageDiv = target;
       activePageDiv.classList.add('active');
       save();
+
       renderProjects();
     }
   }
@@ -184,18 +186,17 @@ const dom = (() => {
     });
   }
 
-  function save() {
-    localStorage.setItem('PROJECT_KEY', JSON.stringify(projects.projectsList));
-    console.log('hieh');
-    localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
-  }
-
   function deleteProject() {
     projects.projectsList = projects.projectsList.filter(
       (project) => project.id !== selectedProjectId,
     );
     selectedProjectId = null;
     renderProjects();
+  }
+
+  function save() {
+    localStorage.setItem('PROJECT_KEY', JSON.stringify(projects.projectsList));
+    localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
   }
 
   return {
@@ -205,7 +206,6 @@ const dom = (() => {
     validateModal,
     selectActivePage,
     deleteProject,
-    save,
   };
 })();
 
