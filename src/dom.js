@@ -1,9 +1,8 @@
-import { format, parseISO, differenceInDays } from 'date-fns';
 import projects from './projects';
 
 const dom = (() => {
   const projectContainer = document.querySelector('[data-project-container]');
-  const selectLinks = document.querySelectorAll('[data-page]');
+  const selectLinks = document.querySelectorAll('[data-page');
 
   const SELECTED_PROJECT_ID_KEY = 'task.selectedProjectId';
   let selectedProjectId = localStorage.getItem(SELECTED_PROJECT_ID_KEY);
@@ -12,11 +11,7 @@ const dom = (() => {
   const form = modal.querySelector('#form');
   const modalTitle = modal.querySelector('#modal-title');
   const modalTitleError = modal.querySelector('.modal-title-error');
-  const addTaskButton = document.querySelector('.add-task');
-  const tasksCount = document.querySelector('.tasks-count');
-  const taskDescription = modal.querySelector('.task-description');
-  const taskDueDate = modal.querySelector('#dueDate');
-  const taskPrioritySelection = modal.querySelector('.task-priority');
+  const allProjects = document.querySelectorAll('.project');
 
   function toggleMenu() {
     const menuShowBtn = document.getElementById('menu');
@@ -43,7 +38,7 @@ const dom = (() => {
 
   function renderProjects() {
     clearElement(projectContainer);
-    console.log(projects.projectsList);
+
     projects.projectsList.forEach((project) => {
       const projectElement = createHTMLElement('div', 'project');
       projectElement.setAttribute('data-project', '');
@@ -89,7 +84,6 @@ const dom = (() => {
       projectElement.appendChild(projectTitle);
       projectElement.appendChild(projectConfig);
       projectContainer.appendChild(projectElement);
-      console.log('done');
     });
   }
 
@@ -158,81 +152,96 @@ const dom = (() => {
       const projectName = modalTitle.value;
       projects.createProject(projectName);
       modalTitle.value = null;
+      manipulateModal('close');
       save();
       console.log(projects.projectsList);
       renderProjects();
-      manipulateModal('close');
     }
   }
 
   function selectActivePage(target) {
+    if (target) {
+      const sidebarItems = document.querySelectorAll('.page');
+      sidebarItems.forEach((item) => {
+        item.classList.remove('active');
+      });
+      console.log(sidebarItems);
+    }
     if (target.classList.contains('page')) {
-      const activePageDiv = target;
-      activePageDiv.classList.add('active');
-    } else {
-      selectedProjectId = target.dataset.projectId;
-      const activePageDiv = target;
-      activePageDiv.classList.add('active');
-      save();
+      addLinkId();
 
+      selectLinks.forEach((link) => {
+        if (link.id === target.id) {
+          link.classList.add('active');
+        }
+      });
+      // } else {
+      //   selectLinks.forEach((link) => link.classList.remove('active'));
+      //   selectedProjectId = target.dataset.projectId;
+
+      //   target.classList.add('active');
+      // }
+    }
+
+    function addLinkId() {
+      selectLinks.forEach((link) => {
+        link.classList.remove('active');
+        link.dataset.id = Date.now().toString();
+      });
+    }
+
+    function deleteProject() {
+      projects.projectsList = projects.projectsList.filter(
+        (project) => project.id !== selectedProjectId,
+      );
+      selectedProjectId = null;
+      save();
       renderProjects();
     }
+
+    function save() {
+      localStorage.setItem(
+        'PROJECT_KEY',
+        JSON.stringify(projects.projectsList),
+      );
+      localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
+    }
+
+    return {
+      toggleMenu,
+      renderProjects,
+      manipulateModal,
+      validateModal,
+      selectActivePage,
+      deleteProject,
+    };
   }
 
-  function selectLink() {
-    selectLinks.forEach((link) => {
-      link.classList.remove('active');
-      link.dataset.id = Date.now().toString();
-    });
+  function createHTMLElement(tagName, classNames, textContent) {
+    const element = document.createElement(tagName);
+
+    if (classNames) {
+      if (Array.isArray(classNames)) {
+        // If classNames is an array, join them into a single string
+        element.className = classNames.join(' ');
+      } else {
+        // If classNames is a single string, assign it directly
+        element.className = classNames;
+      }
+    }
+
+    if (textContent) {
+      element.textContent = textContent;
+    }
+
+    return element;
   }
 
-  function deleteProject() {
-    projects.projectsList = projects.projectsList.filter(
-      (project) => project.id !== selectedProjectId,
-    );
-    selectedProjectId = null;
-    renderProjects();
-  }
-
-  function save() {
-    localStorage.setItem('PROJECT_KEY', JSON.stringify(projects.projectsList));
-    localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
-  }
-
-  return {
-    toggleMenu,
-    renderProjects,
-    manipulateModal,
-    validateModal,
-    selectActivePage,
-    deleteProject,
-  };
-})();
-
-function createHTMLElement(tagName, classNames, textContent) {
-  const element = document.createElement(tagName);
-
-  if (classNames) {
-    if (Array.isArray(classNames)) {
-      // If classNames is an array, join them into a single string
-      element.className = classNames.join(' ');
-    } else {
-      // If classNames is a single string, assign it directly
-      element.className = classNames;
+  function clearElement(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
     }
   }
-
-  if (textContent) {
-    element.textContent = textContent;
-  }
-
-  return element;
-}
-
-function clearElement(element) {
-  while (element.firstChild) {
-    element.removeChild(element.firstChild);
-  }
-}
+})();
 
 export default dom;

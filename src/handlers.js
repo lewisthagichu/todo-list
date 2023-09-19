@@ -1,6 +1,12 @@
 import dom from './dom';
 
 const handlers = (() => {
+  const deleteProjectBtns = document.querySelectorAll('.delete-project');
+
+  deleteProjectBtns.forEach((button) => {
+    button.addEventListener('click', () => console.log('test'));
+  });
+
   function listenClicks() {
     document.addEventListener('click', (event) => {
       const modalMainTitle = document.querySelector('.modal-main-title');
@@ -35,19 +41,13 @@ const handlers = (() => {
       }
 
       // SELECT ACTIVE PAGE
-      if (target.closest('.page')) {
-        const activeLink = target.closest('.page');
-        dom.selectActivePage(activeLink);
+      if (target.classList.contains('page')) {
+        // const activeLink = target.closest('.page');
+        dom.selectActivePage(target);
       }
 
-      if (target.closest('.project')) {
-        const projectDiv = target.closest('.project');
-        dom.selectActivePage(projectDiv);
-      }
-
-      // DELETE PROJECT
       if (target.classList.contains('delete-project')) {
-        dom.deleteProject();
+        console.log('deleting project');
       }
     });
   }
