@@ -175,47 +175,44 @@ const dom = (() => {
           link.classList.add('active');
         }
       });
-      // } else {
-      //   selectLinks.forEach((link) => link.classList.remove('active'));
-      //   selectedProjectId = target.dataset.projectId;
-
-      //   target.classList.add('active');
-      // }
     }
+    // } else {
+    //   selectLinks.forEach((link) => link.classList.remove('active'));
+    //   selectedProjectId = target.dataset.projectId;
 
-    function addLinkId() {
-      selectLinks.forEach((link) => {
-        link.classList.remove('active');
-        link.dataset.id = Date.now().toString();
-      });
-    }
-
-    function deleteProject() {
-      projects.projectsList = projects.projectsList.filter(
-        (project) => project.id !== selectedProjectId,
-      );
-      selectedProjectId = null;
-      save();
-      renderProjects();
-    }
-
-    function save() {
-      localStorage.setItem(
-        'PROJECT_KEY',
-        JSON.stringify(projects.projectsList),
-      );
-      localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
-    }
-
-    return {
-      toggleMenu,
-      renderProjects,
-      manipulateModal,
-      validateModal,
-      selectActivePage,
-      deleteProject,
-    };
+    //   target.classList.add('active');
+    // }
   }
+
+  function addLinkId() {
+    selectLinks.forEach((link) => {
+      link.classList.remove('active');
+      link.dataset.id = Date.now().toString();
+    });
+  }
+
+  function deleteProject() {
+    projects.projectsList = projects.projectsList.filter(
+      (project) => project.id !== selectedProjectId,
+    );
+    selectedProjectId = null;
+    save();
+    renderProjects();
+  }
+
+  function save() {
+    localStorage.setItem('PROJECT_KEY', JSON.stringify(projects.projectsList));
+    localStorage.setItem(SELECTED_PROJECT_ID_KEY, selectedProjectId);
+  }
+
+  return {
+    toggleMenu,
+    renderProjects,
+    manipulateModal,
+    validateModal,
+    selectActivePage,
+    deleteProject,
+  };
 
   function createHTMLElement(tagName, classNames, textContent) {
     const element = document.createElement(tagName);
